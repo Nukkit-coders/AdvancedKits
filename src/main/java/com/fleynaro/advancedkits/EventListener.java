@@ -26,9 +26,9 @@ class EventListener implements Listener {
             BlockEntity tile = player.getLevel().getBlockEntity(event.getBlock().getLocation());
             if (tile instanceof BlockEntitySign) {
                 String[] text = ((BlockEntitySign) tile).getText();
-                if (TextFormat.clean(text[0]).toLowerCase().equals(this.ak.getConfig().getString("sign-text").toLowerCase())) {
+                if (text[0] != null && TextFormat.clean(text[0]).toLowerCase().equals(this.ak.getConfig().getString("sign-text").toLowerCase())) {
                     event.setCancelled();
-                    if (text[1].isEmpty()) {
+                    if (text[1] == null || text[1].isEmpty()) {
                         event.getPlayer().sendMessage(this.ak.langManager.getTranslation("no-sign-on-kit"));
                         return;
                     }
